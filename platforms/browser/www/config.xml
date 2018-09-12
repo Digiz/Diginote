@@ -10,12 +10,11 @@
     <description>
         Hello World sample application that responds to the deviceready event.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
+    <author email="15048@northcote.school.nz" href="http://phonegap.com">
         PhoneGap Team
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <allow-intent href="*,192.168.1/24,*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
