@@ -41,9 +41,9 @@
     //
     function onPhotoDataSuccess(imageData) {
       // Uncomment to view the base64-encoded image data
+      let name = "Benjamin"
       
-      
-
+      document.getElementById("addList").innerHTML = 'Hello, ${name}!';
       // Get image handle
       //
       if (!smallImage1){
@@ -132,7 +132,11 @@
     
 
     <h5>Take a photo or choose image from Gallery</h5>
-    <table>
+
+    <div id="addList">
+      </div>
+          <table>
+
       <tr>
         <td><button onclick="capturePhoto();">Take Photo</button> </td>
         <td><button onclick="capturePhotoEdit();">Take Photo but allow me to crop</button> </td>
