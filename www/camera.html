@@ -20,12 +20,14 @@
       width: 100px;
       height: 100px;
     }
+
+    .i-am-centered { margin: auto; max-width: 300px;}
   </style>
 
 
 </head>
 
-<body class="container-fluid bg-dark">
+<body class="container-fluid bg-dark i-am-centered">
  <a href="index.html"><i class="fas fa-arrow-left fa-5x"></i></a> 
   <div >
     
@@ -47,27 +49,41 @@
               
             </div>
 
-            <div class="row showImageAndNote hide" id="imageContainer">
+            <div class="row showImageAndNote " id="imageContainer">
+<div class="row">
+                <img id='thumbOne' src=''  style="display:none;width:80px;height:80px;" class='img-thumbnail'>
+              </div>
 
-                <img id='thumbOne' src=''  class='img-thumbnail'>
-              
-               <form>
-                <div class="form-group">
-                  <label for="category">Category:</label>
-                  <input type="txt" class="form-control" id="category" placeholder="Math">
-                </div>
+              <form class="form-horizontal">
+                <div class="col-xs-6">
+                <div class="row">                                      
+                         <div class="form-group">
+                           <label class="col-xs-1 control-label text-light" for="category">Category:</label>
+                           <input type="txt" class="form-control col-xs-5" id="category" placeholder="Math">
+                         </div>
+                         </div>
 
-                <div class="form-group">
-                  <label for="note">Note:</label>
-                  <textarea class="form-control" id="note" rows="3" placeholder="Your note here"></textarea>
-                </div>
-                <button type="button" class="btn btn-primary mb-2" onclick="save()">Save</button>
-               </form>
+                         <div class="row">    
+                         <div class="form-group">
+                           <label class="col-xs-1 control-label text-light" for="note">Note:</label>
+                           <textarea class="col-xs-5 form-control" id="note" rows="3" placeholder="Your note here"></textarea>
+                         </div>
+                         </div>
+
+                         <div class="row">
+                         <button type="button" class="btn btn-primary mb-2" onclick="save()">Save</button>
+                        </div>
+                      </div>
+                        </form>
+
+                 
+                      
+           
                 
               
                 </div>
         
-
+</div>
 
         <div class="row">
                 <div class="col-sm">
@@ -138,7 +154,7 @@ On Change
     }
 
     function save(){
-      
+
     }
 
     // Called when a photo is successfully retrieved
