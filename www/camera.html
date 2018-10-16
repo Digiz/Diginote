@@ -94,7 +94,7 @@
           <div class="card text-white bg-dark mb-3">
             <!-- <div class="card-header">Header</div> -->
             <div class="card-body text-center">
-              <button type="button" class="btn btn-danger " onclick="testHide()">
+              <button type="button" class="btn btn-danger " onclick="logout()">
                 Logout</button>
     
     
@@ -243,7 +243,7 @@
     //   }
     // }
 
-function testHide(){
+function logout(){
   $("#imageContainer").show();
 
 
@@ -274,6 +274,7 @@ function testHide(){
       // let x = document.getElementById("imageContainer");
       // x.style.display = "block";
 
+                      // $("#textBoxOne")         
       let thumbOne = document.getElementById('thumbOne');
       thumbOne.style.display = 'block';
       thumbOne.src = imageData
