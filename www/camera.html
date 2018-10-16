@@ -47,18 +47,11 @@
               
             </div>
 
-            <div class="row">
-                    <div class="col-sm">
-                  <div class="card text-white bg-dark mb-3" >
-                    <!-- <div class="card-header">Header</div> -->
-                    <div class="card-body">
-                      <button type="button" class="btn bg-dark col-sm" onclick="runThis()">
-                        <i class="fas fa-file fa-5x " ></i>
-                      </button>
-                      <h4 class="text-light text-center">Files</h4>
-                    </div>
-                  </div>
-                  </div>
+            <div class="row" id="imageContainer">
+              <!-- only add image after its taken, prevent white dot -->
+               
+                
+              
                 </div>
         
 
@@ -78,9 +71,7 @@
               
             </div>
 
-            <div>
-            <img id="thumbOne" src="" class="img-thumbnail">
-            </div>
+          
 
                 <!-- <div id="showImgOne hide">
                     
@@ -187,28 +178,34 @@ testPhoto.push("e")
 
 
 
- var elem = document.querySelector('#photoList');
+
 // Get HTML content
-var html = elem.innerHTML;
-testPhoto.forEach(src => {
+// var html = elem.innerHTML;
+// testPhoto.forEach(src => {
 
-    //kinda worked
-    // var node = document.createElement("LI"); // Create a <li> 
-    // var textnode = document.createTextNode(element); // Create a text 
-    // node.appendChild(textnode);// Append the text 
-    // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
-
-
-// Add HTML to the end of an element's existing content
-// elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
-elem.innerHTML += "<li>"+ src +"</li>"
+//     //kinda worked
+//     // var node = document.createElement("LI"); // Create a <li> 
+//     // var textnode = document.createTextNode(element); // Create a text 
+//     // node.appendChild(textnode);// Append the text 
+//     // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
 
 
+// // Add HTML to the end of an element's existing content
+// // elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
+// elem.innerHTML += "<li>"+ src +"</li>"
 
-});
+
+
+
+// });
 
 
  
+    }
+
+    function changeSize(){
+           
+
     }
 
     // Called when a photo is successfully retrieved
@@ -218,18 +215,25 @@ elem.innerHTML += "<li>"+ src +"</li>"
      
       // Get image handle
       //
-
-
-        thumbOne = document.getElementById('thumbOne');
-        thumbOne.style.display = 'block';
-        thumbOne.src = imageData
+      var elem = document.querySelector('#imageContainer');
+      elem.innerHTML += "<img id='thumbOne' src=\"" + imageData + "\"  class='img-thumbnail'></img>"
+      elem.innerHTML += "<br>"
+      elem.innerHTML += "Category: <input type='text'  id='category'>"
+      elem.innerHTML += "<br>"
+      elem.innerHTML += "Note:<textarea name='' id='note' cols='30' rows='10'></textarea>"
+      elem.innerHTML += "<br>"
+      elem.innerHTML += "<button class='btn btn-primary'>Save</button>"
+      
+        // thumbOne = document.getElementById('thumbOne');
+        // thumbOne.style.display = 'block';
+        // thumbOne.src = imageData
 
 
       //add imagesrc to photo array
 
 
      //on succesful photo add to array
-      photos.push(imageData)
+      // photos.push(imageData)
 
 // show images to screen by looping through photos
 
@@ -242,25 +246,25 @@ elem.innerHTML += "<li>"+ src +"</li>"
 // });
 
 
- var elem = document.querySelector('#photoList');
-// Get HTML content
-var html = elem.innerHTML;
-photos.forEach(src => {
+//  var elem = document.querySelector('#photoList');
+// // Get HTML content
+// var html = elem.innerHTML;
+// photos.forEach(src => {
 
-    //kinda worked
-    // var node = document.createElement("LI"); // Create a <li> 
-    // var textnode = document.createTextNode(element); // Create a text 
-    // node.appendChild(textnode);// Append the text 
-    // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
-
-
-// Add HTML to the end of an element's existing content
-// elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
-elem.innerHTML += "<li>"+ src +"</li>"
+//     //kinda worked
+//     // var node = document.createElement("LI"); // Create a <li> 
+//     // var textnode = document.createTextNode(element); // Create a text 
+//     // node.appendChild(textnode);// Append the text 
+//     // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
 
 
+// // Add HTML to the end of an element's existing content
+// // elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
+// elem.innerHTML += "<li>"+ src +"</li>"
 
-});
+
+
+// });
 
 
     //   if (!smallImage1) {
