@@ -6,12 +6,10 @@
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
     crossorigin="anonymous">
-    <script src="jquery-3.3.1.min.js"></script>
+  <script src="jquery-3.3.1.min.js"></script>
   <title>Capture Photo</title>
 
   <style>
-
-
     .thum {
 
       border: 2px solid red;
@@ -21,87 +19,94 @@
       height: 100px;
     }
 
-    .i-am-centered { margin: auto; max-width: 300px;}
+    .i-am-centered {
+      margin: auto;
+      max-width: 300px;
+    }
   </style>
 
 
 </head>
 
 <body class="container-fluid bg-dark i-am-centered">
- <a href="index.html"><i class="fas fa-arrow-left fa-5x"></i></a> 
-  <div >
-    
+  <a href="index.html">
+    <i class="fas fa-arrow-left fa-5x"></i>
+  </a>
+  <div>
+
     <h1 class="text-light text-center">Camera</h1>
 
-        <div class="row">
-                <div class="col-sm">
-              <div class="card text-white bg-dark mb-3" >
-                <!-- <div class="card-header">Header</div> -->
-                <div class="card-body col-sm text-center">
-                        <button type="button" class="btn btn-primary" onclick="capturePhoto();">Take Photo</button>
-                   
-                  </button> 
+    <div class="row">
+      <div class="col-sm">
+        <div class="card text-white bg-dark mb-3">
+          <!-- <div class="card-header">Header</div> -->
+          <div class="card-body col-sm text-center">
+            <button type="button" class="btn btn-primary" onclick="capturePhoto();">Take Photo</button>
 
-            
-                </div>
-              </div>
-              </div>
-              
-            </div>
+            </button>
 
-            <div class="row showImageAndNote " id="imageContainer">
-<div class="row">
-                <img id='thumbOne' src=''  style="display:none;width:80px;height:80px;" class='img-thumbnail'>
-              </div>
 
-              <form class="form-horizontal">
-                <div class="col-xs-6">
-                <div class="row">                                      
-                         <div class="form-group">
-                           <label class="col-xs-1 control-label text-light" for="category">Category:</label>
-                           <input type="txt" class="form-control col-xs-5" id="category" placeholder="Math">
-                         </div>
-                         </div>
+          </div>
+        </div>
+      </div>
 
-                         <div class="row">    
-                         <div class="form-group">
-                           <label class="col-xs-1 control-label text-light" for="note">Note:</label>
-                           <textarea class="col-xs-5 form-control" id="note" rows="3" placeholder="Your note here"></textarea>
-                         </div>
-                         </div>
+    </div>
 
-                         <div class="row">
-                         <button type="button" class="btn btn-primary mb-2" onclick="save()">Save</button>
-                        </div>
-                      </div>
-                        </form>
+    <div class=" showImageAndNote hide" id="imageContainer">
+      
 
-                 
-                      
-           
-                
-              
-                </div>
+        <img id='thumbOne' src="" style="width:200px;height:200px;" class='mx-auto d-block img-thumbnail'>
         
-</div>
+      <br>
 
-        <div class="row">
-                <div class="col-sm">
-              <div class="card text-white bg-dark mb-3" >
-                <!-- <div class="card-header">Header</div> -->
-                <div class="card-body text-center">
-                    <button type="button" class="btn btn-danger " onclick="logout()">        
-                        Logout</button>
-                  
-            
-                </div>
-              </div>
-              </div>
-              
+      <form class="form-horizontal">
+        <div class="col-xs-6">
+          <div class="row">
+            <div class="form-group">
+              <label class="col-xs-1 control-label text-light" for="category">Category:</label>
+              <input type="txt" class="form-control col-xs-5" id="category" placeholder="Math">
             </div>
+          </div>
 
-           
-</div>
+          <div class="row">
+            <div class="form-group">
+              <label class="col-xs-1 control-label text-light" for="note">Note:</label>
+              <textarea class="col-xs-5 form-control" id="note" rows="3" placeholder="Your note here"></textarea>
+            </div>
+          </div>
+
+          <div class="row">
+            <button type="button" class="btn btn-primary mb-2" onclick="save()">Save</button>
+          </div>
+        </div>
+      </form>
+
+
+
+
+
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <div class="card text-white bg-dark mb-3">
+        <!-- <div class="card-header">Header</div> -->
+        <div class="card-body text-center">
+          <button type="button" class="btn btn-danger " onclick="logout()">
+            Logout</button>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  </div>
 
 
 </body>
@@ -124,36 +129,36 @@
     function onDeviceReady() {
       pictureSource = navigator.camera.PictureSourceType;
       destinationType = navigator.camera.DestinationType
-      
+
 
     }
 
 
-/**
-On Change
-**/
+    /**
+    On Change
+    **/
     (function () {
 
 
-//example of onchange event listener
-         $("#changeID").change(function () {
+      //example of onchange event listener
+      $("#changeID").change(function () {
 
-        });
-
-
-
-
-        })();
+      });
 
 
 
 
-    function changeSize(){
-           
+    })();
+
+
+
+
+    function changeSize() {
+
 
     }
 
-    function save(){
+    function save() {
 
     }
 
@@ -161,7 +166,7 @@ On Change
     //
     function onPhotoDataSuccess(imageData) {
       // Uncomment to view the base64-encoded image data
-     
+
       // Get image handle
       //
       // var elem = document.querySelector('#imageContainer');
@@ -172,62 +177,62 @@ On Change
       // elem.innerHTML += "Note:<textarea name='' id='note' cols='30' rows='10'></textarea>"
       // elem.innerHTML += "<br>"
       // elem.innerHTML += "<button class='btn btn-primary'>Save</button>"
-       
+
       $("#showImageAndNote").removeClass("hide");
 
-        thumbOne = document.getElementById('thumbOne');
-        thumbOne.style.display = 'block';
-        thumbOne.src = imageData
+      thumbOne = document.getElementById('thumbOne');
+      thumbOne.style.display = 'block';
+      thumbOne.src = imageData
 
 
       //add imagesrc to photo array
 
 
-     //on succesful photo add to array
+      //on succesful photo add to array
       // photos.push(imageData)
 
-// show images to screen by looping through photos
+      // show images to screen by looping through photos
 
-//       testPhoto.forEach(photoSource => {
-//     var node = document.createElement("LI"); // Create a <li> 
-//     var textnode = document.createTextNode(photoSource); // Create a text 
-//     node.appendChild(textnode);// Append the text 
-//     document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
-    
-// });
+      //       testPhoto.forEach(photoSource => {
+      //     var node = document.createElement("LI"); // Create a <li> 
+      //     var textnode = document.createTextNode(photoSource); // Create a text 
+      //     node.appendChild(textnode);// Append the text 
+      //     document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
 
-
-//  var elem = document.querySelector('#photoList');
-// // Get HTML content
-// var html = elem.innerHTML;
-// photos.forEach(src => {
-
-//     //kinda worked
-//     // var node = document.createElement("LI"); // Create a <li> 
-//     // var textnode = document.createTextNode(element); // Create a text 
-//     // node.appendChild(textnode);// Append the text 
-//     // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
+      // });
 
 
-// // Add HTML to the end of an element's existing content
-// // elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
-// elem.innerHTML += "<li>"+ src +"</li>"
+      //  var elem = document.querySelector('#photoList');
+      // // Get HTML content
+      // var html = elem.innerHTML;
+      // photos.forEach(src => {
+
+      //     //kinda worked
+      //     // var node = document.createElement("LI"); // Create a <li> 
+      //     // var textnode = document.createTextNode(element); // Create a text 
+      //     // node.appendChild(textnode);// Append the text 
+      //     // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
+
+
+      // // Add HTML to the end of an element's existing content
+      // // elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
+      // elem.innerHTML += "<li>"+ src +"</li>"
 
 
 
-// });
+      // });
 
 
-    //   if (!smallImage1) {
-    //     smallImage1 = document.getElementById('smallImage1');
-    //     smallImage1.style.display = 'block';
-    //     smallImage1.src = imageData
-    //   } else if (!smallImage2) {
-    //     smallImage2 = document.getElementById('smallImage2');
-    //     smallImage2.style.display = 'block';
-    //     smallImage2.src = imageData
+      //   if (!smallImage1) {
+      //     smallImage1 = document.getElementById('smallImage1');
+      //     smallImage1.style.display = 'block';
+      //     smallImage1.src = imageData
+      //   } else if (!smallImage2) {
+      //     smallImage2 = document.getElementById('smallImage2');
+      //     smallImage2.style.display = 'block';
+      //     smallImage2.src = imageData
 
-    //   }
+      //   }
 
 
       // Show the captured photo
@@ -237,7 +242,7 @@ On Change
 
 
 
-    //   alert(imageData)
+      //   alert(imageData)
     }
 
     // Called when a photo is successfully retrieved
