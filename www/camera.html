@@ -52,7 +52,9 @@
     
     
     
-        
+    <div class="thum">
+      <img style="display:none;width:80px;height:80px;" id="smallImage1" src="" />
+    </div>
     
         
         <div class="showImageAndNote" id="imageContainer">
@@ -143,6 +145,7 @@
 //on page load
     $( document ).ready(function() {
       $("#imageContainer").hide();
+      var smallImage1 = "";
 });
 
 
@@ -167,81 +170,82 @@
 
   
 
-    // function save() {
+    function save() {
 
-    //   // if (false) {
-    //   //   alert("validation failed false");
-    //   //   returnToPreviousPage();
-    //   //   return false;
-    //   // }
-
-
-
-    //   //get any note the user may have entered
-    //   // let userNote = document.getElementById('note').value;
-    //   // let category = document.getElementById('category').value;
-
-    //   // var imageLocations = ["location1", "location2", "location3"]; //this is where we will need to get all image locations
-    //   // var d = new Date();
-
-
-    //   //get any notes that may exist,
-    //   //(only one string is stored for Notes, we replace this this string with existing data and new data)
-    //   this.lsNotes = localStorage.getItem('Notes');
-
-    //    // If no existing data, we need to create an array,
-    //   //if there is data i.e was returned from local storage,
-    //   //then we need to parse the string to an array so we can work with it
-    //   // lsNotes = lsNotes ? JSON.parse(lsNotes) : []; //Ternary
-    //   if (this.lsNotes){//if lsNotes has data
-    //     this.lsNotes = JSON.parse(this.lsNotes);
-    //   }
-    //   else{
-    //     this.lsNotes = [];//if no data returned from local storage i'll still need an empty array to add to it.
-    //   }
-
-    //   let imgLocs = ["location1", "location2", "location3"]; //static for now :TODO get real img loc
-
-    //   //append to array
-    //   this.lsNotes.push(
-    //     {
-    //       date: new Date(),
-    //       category: document.getElementById('category').value,
-    //       note: document.getElementById('note').value,
-    //       imageLocations: imgLocs,
-    //     }
-    //   );
-
-    //   //set local storage
-    //   localStorage.setItem('Notes', JSON.stringify(this.lsNotes))
-
-    // }
-
-    // function getFromLS(){
-    //   lsNotes = this.lsNotes
-    //     console.log("top " + this.lsNotes)
-    //    this.lsNotes = localStorage.getItem('Notes');
-    //    console.log("after " + this.lsNotes)
-    //    console.log("this " + this.lsNotes)
+    var lsNotes = []
+      // if (false) {
+      //   alert("validation failed false");
+      //   returnToPreviousPage();
+      //   return false;
+      // }
 
 
 
-    //   // loop through the array of objects
-    //   if (this.lsNotes) {
+      //get any note the user may have entered
+      // let userNote = document.getElementById('note').value;
+      // let category = document.getElementById('category').value;
 
-    //     this.lsNotes = JSON.parse(this.lsNotes)
-    //     // console.log(JSON.stringify(lsNotes, null, 2));
+      // var imageLocations = ["location1", "location2", "location3"]; //this is where we will need to get all image locations
+      // var d = new Date();
 
-    //     for (var index in this.lsNotes) {
-    //       document.getElementById('note').value = this.lsNotes[index].note
-    //       document.getElementById('category').value = this.lsNotes[index].category
-    //       // console.log(lsNotes[index].note);
-    //       // console.log(lsNotes[index].category);
-    //     }
-    //   }else{
-    //     alert("sorry no notes to get")
-    //   }
-    // }
+
+      //get any notes that may already exist,
+      //(only one string is stored for Notes, we replace this string with existing data and new data)
+      lsNotes = localStorage.getItem('Notes');
+
+       // If no existing data, we need to create an array,
+      //if there is data i.e was returned from local storage,
+      //then we need to parse the string to an array so we can work with it
+      // lsNotes = lsNotes ? JSON.parse(lsNotes) : []; //Ternary
+      if (lsNotes){//if lsNotes has data
+        lsNotes = JSON.parse(lsNotes);
+      }
+      else{
+        lsNotes = [];//if no data returned from local storage i'll still need an empty array to add to it.
+      }
+
+      let imgLocs = ["location1", "location2", "location3"]; //static for now :TODO get real img loc
+
+      //append to array
+      lsNotes.push(
+        {
+          date: new Date(),
+          category: document.getElementById('category').value,
+          note: document.getElementById('note').value,
+          imageLocations: imgLocs,
+        }
+      );
+
+      //set local storage
+      localStorage.setItem('Notes', JSON.stringify(lsNotes))
+
+    }
+
+    function getFromLS(){
+      lsNotes = lsNotes
+        console.log("top " + lsNotes)
+       lsNotes = localStorage.getItem('Notes');
+       console.log("after " + lsNotes)
+       console.log("this " + lsNotes)
+
+
+
+      // loop through the array of objects
+      if (lsNotes) {
+
+        lsNotes = JSON.parse(lsNotes)
+        // console.log(JSON.stringify(lsNotes, null, 2));
+
+        for (var index in lsNotes) {
+          document.getElementById('note').value = lsNotes[index].note
+          document.getElementById('category').value = lsNotes[index].category
+          // console.log(lsNotes[index].note);
+          // console.log(lsNotes[index].category);
+        }
+      }else{
+        alert("sorry no notes to get")
+      }
+    }
 
 function logout(){
   $("#imageContainer").show();
@@ -266,6 +270,12 @@ function logout(){
       // elem.innerHTML += "Note:<textarea name='' id='note' cols='30' rows='10'></textarea>"
       // elem.innerHTML += "<br>"
       // elem.innerHTML += "<button class='btn btn-primary'>Save</button>"
+
+
+        smallImage1 = document.getElementById('smallImage1');
+        smallImage1.style.display = 'block';
+        smallImage1.src = imageData
+
 
       $("#imageContainer").show();
 
