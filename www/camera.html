@@ -1,38 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
-    crossorigin="anonymous">
-  
-  <title>Capture Photo</title>
-
-  <style>
-    .thum {
-
-      border: 2px solid red;
-      background-color: #ccc;
-      padding: 10px;
-      width: 100px;
-      height: 100px;
-    }
-
-    .i-am-centered {
-      margin: auto;
-      max-width: 300px;
-    }
-  </style>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <title>Hello World</title>
 </head>
-
 <body class="container bg-dark i-am-centered">
-
-
+    
     <a href="index.html">
         <i class="fas fa-arrow-left fa-5x"></i>
       </a>
@@ -105,318 +115,317 @@
         </div>
     
       </div>
-  
 
 
-</body>
-<footer>
-  <!-- <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script> -->
-  <!-- <script src="jquery-3.3.1.min.js"></script> -->
-  <script
-  src="js/jquery-3.3.1.min.js"
- ></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
+      <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+      <!-- <script type="text/javascript">
+          app.initialize();
+      </script> -->
 
-  <script type="text/javascript" charset="utf-8">
-
-
-    var pictureSource;   // picture source
-    var destinationType; // sets the format of returned value
-    var imgSrc = "";
-    var smallImage1 = "";
-    var smallImage2 = "";
-    var photos = []
-
-    // Wait for device API libraries to load
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    function onDeviceReady() {
-      pictureSource = navigator.camera.PictureSourceType;
-      destinationType = navigator.camera.DestinationType
+    <script type="text/javascript" charset="utf-8">
 
 
-
-
-// var x = document.getElementById("imageContainer");
-// x.style.display = "none";
-
-    }
-
-//on page load
-    $( document ).ready(function() {
-      $("#imageContainer").hide();
-      var smallImage1 = "";
-});
-
-
-    /**
-    On Change
-    **/
-    // (function () {
-
-
-    //   //example of onchange event listener
-    //   // $("#changeID").change(function () {
-
-    //   // });
-
-
-
-
-    // })();
-
-
-
-
-  
-
-    function save() {
-
-    var lsNotes = []
-      // if (false) {
-      //   alert("validation failed false");
-      //   returnToPreviousPage();
-      //   return false;
-      // }
-
-
-
-      //get any note the user may have entered
-      // let userNote = document.getElementById('note').value;
-      // let category = document.getElementById('category').value;
-
-      // var imageLocations = ["location1", "location2", "location3"]; //this is where we will need to get all image locations
-      // var d = new Date();
-
-
-      //get any notes that may already exist,
-      //(only one string is stored for Notes, we replace this string with existing data and new data)
-      lsNotes = localStorage.getItem('Notes');
-
-       // If no existing data, we need to create an array,
-      //if there is data i.e was returned from local storage,
-      //then we need to parse the string to an array so we can work with it
-      // lsNotes = lsNotes ? JSON.parse(lsNotes) : []; //Ternary
-      if (lsNotes){//if lsNotes has data
-        lsNotes = JSON.parse(lsNotes);
-      }
-      else{
-        lsNotes = [];//if no data returned from local storage i'll still need an empty array to add to it.
-      }
-
-      let imgLocs = ["location1", "location2", "location3"]; //static for now :TODO get real img loc
-
-      //append to array
-      lsNotes.push(
-        {
-          date: new Date(),
-          category: document.getElementById('category').value,
-          note: document.getElementById('note').value,
-          imageLocations: imgLocs,
+        var pictureSource;   // picture source
+        var destinationType; // sets the format of returned value
+        var imgSrc = "";
+        var smallImage1 = "";
+        var smallImage2 = "";
+        var photos = []
+    
+        // Wait for device API libraries to load
+        document.addEventListener("deviceready", onDeviceReady, false);
+    
+        // device APIs are available
+        function onDeviceReady() {
+          pictureSource = navigator.camera.PictureSourceType;
+          destinationType = navigator.camera.DestinationType
+    
+    
+    
+    
+    // var x = document.getElementById("imageContainer");
+    // x.style.display = "none";
+    
         }
-      );
-
-      //set local storage
-      localStorage.setItem('Notes', JSON.stringify(lsNotes))
-
-    }
-
-    function getFromLS(){
-      lsNotes = lsNotes
-        console.log("top " + lsNotes)
-       lsNotes = localStorage.getItem('Notes');
-       console.log("after " + lsNotes)
-       console.log("this " + lsNotes)
-
-
-
-      // loop through the array of objects
-      if (lsNotes) {
-
-        lsNotes = JSON.parse(lsNotes)
-        // console.log(JSON.stringify(lsNotes, null, 2));
-
-        for (var index in lsNotes) {
-          document.getElementById('note').value = lsNotes[index].note
-          document.getElementById('category').value = lsNotes[index].category
-          // console.log(lsNotes[index].note);
-          // console.log(lsNotes[index].category);
+    
+    //on page load
+        $( document ).ready(function() {
+          $("#imageContainer").hide();
+          var smallImage1 = "";
+    });
+    
+    
+        /**
+        On Change
+        **/
+        // (function () {
+    
+    
+        //   //example of onchange event listener
+        //   // $("#changeID").change(function () {
+    
+        //   // });
+    
+    
+    
+    
+        // })();
+    
+    
+    
+    
+      
+    
+        function save() {
+    
+        var lsNotes = []
+          // if (false) {
+          //   alert("validation failed false");
+          //   returnToPreviousPage();
+          //   return false;
+          // }
+    
+    
+    
+          //get any note the user may have entered
+          // let userNote = document.getElementById('note').value;
+          // let category = document.getElementById('category').value;
+    
+          // var imageLocations = ["location1", "location2", "location3"]; //this is where we will need to get all image locations
+          // var d = new Date();
+    
+    
+          //get any notes that may already exist,
+          //(only one string is stored for Notes, we replace this string with existing data and new data)
+          lsNotes = localStorage.getItem('Notes');
+    
+           // If no existing data, we need to create an array,
+          //if there is data i.e was returned from local storage,
+          //then we need to parse the string to an array so we can work with it
+          // lsNotes = lsNotes ? JSON.parse(lsNotes) : []; //Ternary
+          if (lsNotes){//if lsNotes has data
+            lsNotes = JSON.parse(lsNotes);
+          }
+          else{
+            lsNotes = [];//if no data returned from local storage i'll still need an empty array to add to it.
+          }
+    
+          let imgLocs = ["location1", "location2", "location3"]; //static for now :TODO get real img loc
+    
+          //append to array
+          lsNotes.push(
+            {
+              date: new Date(),
+              category: document.getElementById('category').value,
+              note: document.getElementById('note').value,
+              imageLocations: imgLocs,
+            }
+          );
+    
+          //set local storage
+          localStorage.setItem('Notes', JSON.stringify(lsNotes))
+    
         }
-      }else{
-        alert("sorry no notes to get")
-      }
-    }
-
-function logout(){
-  $("#imageContainer").show();
-
-
-
-  // let x = document.getElementById("imageContainer");
-  //     x.style.display = "block";
-}
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoDataSuccess(imageData) {
-      // Uncomment to view the base64-encoded image data
-
-      // Get image handle
-      //
-      // var elem = document.querySelector('#imageContainer');
-      // elem.innerHTML += "<img id='thumbOne' src=\"" + imageData + "\"  class='img-thumbnail'></img>"
-      // elem.innerHTML += "<br>"
-      // elem.innerHTML += "Category: <input type='text'  id='category'>"
-      // elem.innerHTML += "<br>"
-      // elem.innerHTML += "Note:<textarea name='' id='note' cols='30' rows='10'></textarea>"
-      // elem.innerHTML += "<br>"
-      // elem.innerHTML += "<button class='btn btn-primary'>Save</button>"
-
-
-        smallImage1 = document.getElementById('smallImage1');
-        smallImage1.style.display = 'block';
-        smallImage1.src = imageData
-
-
+    
+        function getFromLS(){
+          lsNotes = lsNotes
+            console.log("top " + lsNotes)
+           lsNotes = localStorage.getItem('Notes');
+           console.log("after " + lsNotes)
+           console.log("this " + lsNotes)
+    
+    
+    
+          // loop through the array of objects
+          if (lsNotes) {
+    
+            lsNotes = JSON.parse(lsNotes)
+            // console.log(JSON.stringify(lsNotes, null, 2));
+    
+            for (var index in lsNotes) {
+              document.getElementById('note').value = lsNotes[index].note
+              document.getElementById('category').value = lsNotes[index].category
+              // console.log(lsNotes[index].note);
+              // console.log(lsNotes[index].category);
+            }
+          }else{
+            alert("sorry no notes to get")
+          }
+        }
+    
+    function logout(){
       $("#imageContainer").show();
-
-      // showImageAndNote
-
+    
+    
+    
       // let x = document.getElementById("imageContainer");
-      // x.style.display = "block";
-
-                      // $("#textBoxOne")         
-      let thumbOne = document.getElementById('thumbOne');
-      thumbOne.style.display = 'block';
-      thumbOne.src = imageData
-
-
-      //add imagesrc to photo array
-
-
-      //on succesful photo add to array
-      // photos.push(imageData)
-
-      // show images to screen by looping through photos
-
-      //       testPhoto.forEach(photoSource => {
-      //     var node = document.createElement("LI"); // Create a <li> 
-      //     var textnode = document.createTextNode(photoSource); // Create a text 
-      //     node.appendChild(textnode);// Append the text 
-      //     document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
-
-      // });
-
-
-      //  var elem = document.querySelector('#photoList');
-      // // Get HTML content
-      // var html = elem.innerHTML;
-      // photos.forEach(src => {
-
-      //     //kinda worked
-      //     // var node = document.createElement("LI"); // Create a <li> 
-      //     // var textnode = document.createTextNode(element); // Create a text 
-      //     // node.appendChild(textnode);// Append the text 
-      //     // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
-
-
-      // // Add HTML to the end of an element's existing content
-      // // elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
-      // elem.innerHTML += "<li>"+ src +"</li>"
-
-
-
-      // });
-
-
-      //   if (!smallImage1) {
-      //     smallImage1 = document.getElementById('smallImage1');
-      //     smallImage1.style.display = 'block';
-      //     smallImage1.src = imageData
-      //   } else if (!smallImage2) {
-      //     smallImage2 = document.getElementById('smallImage2');
-      //     smallImage2.style.display = 'block';
-      //     smallImage2.src = imageData
-
-      //   }
-
-
-      // Show the captured photo
-      // The in-line CSS rules are used to resize the image
-      //
-      // smallImage.src = "data:image/jpeg;base64," + imageData;
-
-
-
-      //   alert(imageData)
+      //     x.style.display = "block";
     }
-
-    // Called when a photo is successfully retrieved
-    //
-    function onPhotoURISuccess(imageURI) {
-      // Uncomment to view the image file URI
-      // console.log(imageURI);
-      imgSrc = imageURI
-
-
-      // Get image handle
-      var largeImage = document.getElementById('largeImage');
-
-      // Unhide image elements
-      largeImage.style.display = 'block';
-
-      // Show the captured photo
-      // The in-line CSS rules are used to resize the image
-      largeImage.src = imageURI;
-    }
-
-
-
-
-
-
-
-    // A button will call this function
-    function capturePhoto() {
-      // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail,
-        {
-          saveToPhotoAlbum: true,
-          quality: 50,
-          destinationType: destinationType.FILE_URI
-
-        });
-    }
-
-    function capturePhotoEdit() {
-      // Take picture using device camera and retrieve image as base64-encoded string
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail,
-        {
-          allowEdit: true,
-          quality: 50,
-          destinationType: destinationType.FILE_URI
-
-        });
-    }
-
-
-
-    // A button will call this function
-    //
-    function getPhoto(source) {
-      // Retrieve image file location from specified source
-      navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
-        quality: 50,
-        destinationType: destinationType.FILE_URI,
-        sourceType: source
-      });
-    }
-
-    // Called if something bad happens.
-    function onFail(message) {
-      alert('Failed because: ' + message);
-    }
-
-  </script>
-</footer>
-
-</html>
+        // Called when a photo is successfully retrieved
+        //
+        function onPhotoDataSuccess(imageData) {
+          // Uncomment to view the base64-encoded image data
+    
+          // Get image handle
+          //
+          // var elem = document.querySelector('#imageContainer');
+          // elem.innerHTML += "<img id='thumbOne' src=\"" + imageData + "\"  class='img-thumbnail'></img>"
+          // elem.innerHTML += "<br>"
+          // elem.innerHTML += "Category: <input type='text'  id='category'>"
+          // elem.innerHTML += "<br>"
+          // elem.innerHTML += "Note:<textarea name='' id='note' cols='30' rows='10'></textarea>"
+          // elem.innerHTML += "<br>"
+          // elem.innerHTML += "<button class='btn btn-primary'>Save</button>"
+    
+    
+            smallImage1 = document.getElementById('smallImage1');
+            smallImage1.style.display = 'block';
+            smallImage1.src = imageData
+    
+    
+          $("#imageContainer").show();
+    
+          // showImageAndNote
+    
+          // let x = document.getElementById("imageContainer");
+          // x.style.display = "block";
+    
+                          // $("#textBoxOne")         
+          let thumbOne = document.getElementById('thumbOne');
+          thumbOne.style.display = 'block';
+          thumbOne.src = imageData
+    
+    
+          //add imagesrc to photo array
+    
+    
+          //on succesful photo add to array
+          // photos.push(imageData)
+    
+          // show images to screen by looping through photos
+    
+          //       testPhoto.forEach(photoSource => {
+          //     var node = document.createElement("LI"); // Create a <li> 
+          //     var textnode = document.createTextNode(photoSource); // Create a text 
+          //     node.appendChild(textnode);// Append the text 
+          //     document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
+    
+          // });
+    
+    
+          //  var elem = document.querySelector('#photoList');
+          // // Get HTML content
+          // var html = elem.innerHTML;
+          // photos.forEach(src => {
+    
+          //     //kinda worked
+          //     // var node = document.createElement("LI"); // Create a <li> 
+          //     // var textnode = document.createTextNode(element); // Create a text 
+          //     // node.appendChild(textnode);// Append the text 
+          //     // document.getElementById("photoList").appendChild(node);// Append <li> to <ul> with id="myList"
+    
+    
+          // // Add HTML to the end of an element's existing content
+          // // elem.innerHTML += "<li><img style='display:none;width:80px;height:80px;'  src='"+  src + "' /></li>"
+          // elem.innerHTML += "<li>"+ src +"</li>"
+    
+    
+    
+          // });
+    
+    
+          //   if (!smallImage1) {
+          //     smallImage1 = document.getElementById('smallImage1');
+          //     smallImage1.style.display = 'block';
+          //     smallImage1.src = imageData
+          //   } else if (!smallImage2) {
+          //     smallImage2 = document.getElementById('smallImage2');
+          //     smallImage2.style.display = 'block';
+          //     smallImage2.src = imageData
+    
+          //   }
+    
+    
+          // Show the captured photo
+          // The in-line CSS rules are used to resize the image
+          //
+          // smallImage.src = "data:image/jpeg;base64," + imageData;
+    
+    
+    
+          //   alert(imageData)
+        }
+    
+        // Called when a photo is successfully retrieved
+        //
+        function onPhotoURISuccess(imageURI) {
+          // Uncomment to view the image file URI
+          // console.log(imageURI);
+          imgSrc = imageURI
+    
+    
+          // Get image handle
+          var largeImage = document.getElementById('largeImage');
+    
+          // Unhide image elements
+          largeImage.style.display = 'block';
+    
+          // Show the captured photo
+          // The in-line CSS rules are used to resize the image
+          largeImage.src = imageURI;
+        }
+    
+    
+    
+    
+    
+    
+    
+        // A button will call this function
+        function capturePhoto() {
+          // Take picture using device camera and retrieve image as base64-encoded string
+          navigator.camera.getPicture(onPhotoDataSuccess, onFail,
+            {
+    
+    
+              
+              saveToPhotoAlbum: true,
+              quality: 50,
+              destinationType: destinationType.FILE_URI
+    
+            });
+        }
+    
+        function capturePhotoEdit() {
+          // Take picture using device camera and retrieve image as base64-encoded string
+          navigator.camera.getPicture(onPhotoDataSuccess, onFail,
+            {
+              allowEdit: true,
+              quality: 50,
+              destinationType: destinationType.FILE_URI
+    
+            });
+        }
+    
+    
+    
+        // A button will call this function
+        //
+        function getPhoto(source) {
+          // Retrieve image file location from specified source
+          navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+            quality: 50,
+            destinationType: destinationType.FILE_URI,
+            sourceType: source
+          });
+        }
+    
+        // Called if something bad happens.
+        function onFail(message) {
+          alert('Failed because: ' + message);
+        }
+    
+      </script>
+</body>
